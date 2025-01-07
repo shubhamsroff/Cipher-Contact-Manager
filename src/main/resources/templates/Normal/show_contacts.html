@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="~{Normal/base::layout(~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Show Contacts</title>
+	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+   </script>
+<style>
+.search-container {
+	position: relative;
+}
+
+.search-result {
+	position: absolute;
+	background: white;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid grey;
+	font: red;
+}
+</style>
+</head>
+<body>
+
+	<section>
+
+		<div th:if="${session.mess}" class="container mt-6">
+			<div th:classappend="${'alert-'+session.mess.type}"
+				class="alert text-center" role="alert">
+				<span th:text="${session.mess.content}"></span>
+			</div>
+			<th:block th:text="${@showHelper.removeMessageFromSession()}"></th:block>
+
+		</div>
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+				<h1 class="text-center">Your Contacts</h1>
+				<div class="search-container my-3">
+					<input type="search" th:onkeyup="search()" id="search-input"
+						class="form-control" placeholder="Search Your Contact" />
+					<div class="search-result">
+						<!--   Result Goes Here -->
+
+					</div>
+				</div>
+				<div class="table-responsive">
+
+
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col">Name</th>
+								<th scope="col">Email</th>
+								<th scope="col">Phone</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+
+
+							<tr th:each="c:${contacts}">
+								<th scope="row" th:text="${'SCM2024'+c.cId}">1</th>
+								 <td><img class="my_profile_picture"
+									th:src="@{'/Images/'+${c.imageUrl}}"> <span
+									th:text=${c.name}></span></td>
+								<td><a href="#" th:href="@{'/user/'+${c.cId}+'/contact'}"><span
+										th:text=${c.email}></span></a></td>
+								<td th:text=${c.phone}>@twitter</td>
+								<td>
+									<!--For passing dynamic content in java script:--  th:onclick="|deleteContact($(c.cid))|" 
+      --> <a th:href="@{'/user/delete/'+${c.cId}}"
+								 th:onclick="|deleteContact($(c.cid))|"	class="btn btn-danger btn-sm">Delete</a>
+									<form method="post" class="mt-2"
+										th:action="@{'/user/update-contact/'+${c.cId}}">
+										<button type="submit" class="btn btn-primary btn-sm">Update</button>
+									</form>
+
+								</td>
+							</tr>
+
+						</tbody>
+
+					</table>
+				</div>
+				<!-- 
+				Add Pagination
+			 -->
+
+				<nav aria-label="page navigation example">
+					<ul class="pagination">
+
+						<li th:if="${currentPage!=0}" class="page-item "><a
+							th:href="@{'/user/show-contacts/'+${currentPage-1}}"
+							class="page-link" href="#">Previous</a></li>
+
+						<li th:classappend="${currentPage==i-1}?'active':''"
+							th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item">
+							<a th:href="@{'/user/show-contacts/'+${i-1}}" class="page-link"
+							href="#"><span th:text=${i}></span></a>
+						</li>
+
+						<li th:if="${currentPage+1!=totalPages}" class="page-item"><a
+							th:href="@{'/user/show-contacts/'+${currentPage+1}}"
+							class="page-link" href="#">next</a></li>
+
+					</ul>
+				</nav>
+			</div>
+		</div>
+		</div>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> 
+    </script>
+		<script language="javascript">
+const search=()=>{
+		
+	
+		let query=$("#search-input").val();
+		if(query=="")
+			{
+			
+			  $(".search-result").hide();
+			}
+		else{
+			console.log(query);
+			let url=`http://localhost:9192/search/${query}`;
+			fetch(url).then((response)=>{
+				return response.json();
+			}).then((data)=>{
+				
+				let text=`<div class='list-group'>`
+				data.forEach((contact)=>{
+					text+=`<a href='/user/${contact.cId}/contact' class='list-group-item list-group-item-action'>
+					${contact.name}</a>`
+				});
+				text+=`</div>`;
+				
+				$(".search-result").html(text);
+				$(".search-result").show();
+			});
+			
+		}
+	};
+     
+    
+
+
+	
+	
+      </script>
+      	<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">   
+</script>
+			<script>
+			$(document).ready(()=>{	$(".item").removeClass('active');
+			$("#view-link").addClass('active');
+						});
+			</script>
+			
+	</section>
+
+</body>
+</html>

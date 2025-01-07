@@ -1,0 +1,94 @@
+body {
+	background: #e2e2e2 !important;
+}
+
+.bg-primary {
+	background: #009688 !important;
+}
+
+.most {
+	margin-left: 100px;
+	padding: 10px 5px;
+}
+
+.banner {
+	width: 93%;
+	height: 90vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, .8)),
+		url("../Images/shubh.jpg");
+	color: white;
+	background-size: cover;
+}
+
+.sidebar {
+	width: 18%;
+	background: white;
+	height: 100%;
+	position: fixed;
+	padding-top: 45px;
+}
+
+.sidebar a {
+	display: block;
+	width: 100%;
+	padding: 10px 25px;
+	text-decoration: none;
+	color: gray;
+}
+
+.sidebar a:hover {
+	background: #e1e1e1;
+}
+
+@media only screen and (max-width:600px) {
+	.sidebar {
+		display: none;
+		height: .100vh;
+		width: 80% !important;
+		background: white;
+		padding-top: 20px;
+		position:fixed;
+	}
+	.content {
+		margin-left: 0% !important;
+	}
+}
+
+.sidebar .divider {
+	height: .5px;
+	width: 100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+}
+
+.content {
+	margin-left: 20%;
+}
+.sidebar .crossBtn{
+	position:absolute;
+	top:0px;
+	right:35px;
+	font-size:36px;
+	cursor:pointer;
+}
+
+
+.my_profile_picture{
+	width:35px !important;
+	height:35px !important;
+	object-fit:cover;
+	border-radius:50%;
+	border:1px solid green;
+}
+
+/*Search CSS*/
+
+/* Side bar hover */
+
+.active{
+	background: #009688 !important;
+	font:white !important;
+	color:white !important;
+}
+
+

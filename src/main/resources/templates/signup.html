@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{base::layout(~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="${title}">Home</title>
+</head>
+<body>
+
+	<section class="vh-95 mt-4">
+	<div class="container form-group col-md-8 offset-md-2">
+	<div  th:if="${session.message}" th:classappend="${session.message.type}" class="alert">
+		<p th:text="${session.message.content}"></p>
+		<!-- <th:block th:text="${#session.removeAttribute('message')}"></th:block> -->
+			<th:block th:text="${@showHelper.removeMessageFromSession()}"></th:block>
+	</div>
+	</div>
+			<form novalidate class="mt-5 ml-auto" method="post" th:action="@{do_register}" th:object="${user}">
+	<div    class="form-group col-md-8 offset-md-2">
+				<label for="exampleInputName">Enter Name</label> <input
+					th:value="${user.name}"  name="name" 
+					th:classappend="${#fields.hasErrors('name')?'is-invalid':''}" type="text" class="form-control" id="exampleInputName"
+					aria-describedby="emailHelp" placeholder="Enter name" required>
+			<div class="invalid-feedback" th:each="e:${#fields.errors('name')}" th:text="${e}">
+      			
+   			 </div>
+			</div>
+			 
+			<div class="form-group col-md-8 offset-md-2">
+				<label for="exampleInputEmail1">Enter Email</label> <input
+					th:value="${user.email}"  name="email"type="email" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" placeholder="Enter email" required>
+			</div>
+			<div  class="form-group col-md-8 offset-md-2">
+				<label for="exampleInputPassword1">Password</label> <input
+					name="password" type="password" class="form-control" id="exampleInputPassword1"
+					placeholder="Password" required>
+			</div>
+				<div class="form-group col-md-8 offset-md-2">
+				<label for="exampleInputEmail1">About</label> <input
+					th:value="${user.description}"  name="description"type="text" class="form-control" id="exampleInputEmail1"
+					aria-describedby="emailHelp" placeholder="about" required>
+			</div>
+			<div  class="form-check col-md-8 offset-md-2">
+				<input type="checkbox" name="agreement" class="form-check-input" id="exampleCheck1">
+				<label class="form-check-label" for="exampleCheck1">Check me
+					out</label>
+			</div>
+			<div class="form-check col-md-8 offset-md-2">
+			<button  type="submit" class="btn bg-primary">Submit</button>
+			<button  type="reset" class="btn btn-danger">Reset</button>
+			</div>
+		</form>
+
+	</section>
+
+</body>
+</html>

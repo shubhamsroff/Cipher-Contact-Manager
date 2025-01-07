@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+	integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+	crossorigin="anonymous"></script>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+	integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+		<div class="contaier">
+			<div class="row">
+				<div class="col-md-10 offset-md-1">
+				
+				<div class="card">
+				
+					<div class="card-body">
+						<p class="text-center fs-3">Email Sending App</p>
+						<th:block th:if="${session.msg}">
+						<p>[[${session.msg}]]</p>
+					<th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+						</th:block>
+					<form th:action="@{/sendEmail}" method="post">
+						<div class="mb-3">
+							<lebel>
+								Enter Email Id
+							</lebel>
+							<input type="text" name="to" class="form-control"/>
+						
+						</div>
+						
+							<div class="mb-3">
+							<lebel>
+								Subject
+							</lebel>
+							<input type="text" name="subject" class="form-control"/>
+						
+						</div>
+						
+						<div class="mb-3">
+							<lebel>
+								Message
+							</lebel>
+							<textarea rows="5" cols=""  name="message" class="form-control"></textarea>
+						
+						</div>
+					<button type="submit" class="btn btn-primary col-md-12">
+							Send
+					</button>
+					</form>
+					</div>
+				</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+
+</body>
+</html>

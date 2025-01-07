@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+	th:replace="~{Normal/base::layout(~{::section})}">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="card mr-2 mt-3">
+			<div class="card-body">
+				<h1 class="text-center">Add Contact</h1>
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<form action="#" th:object="${contact}"
+							enctype="multipart/form-data" method="post"
+							th:action="@{/user/process-contact}" class="mt-3">
+
+							<!-- 
+						First-Name Field
+					 -->
+							<div class="input-group mt-4">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-plus"> </i>
+									</div>
+								</div>
+								<input required type="text" id="firstName" name="name"
+									placeholder="Enter Name Here" class="form-control" />
+							</div>
+							<!-- 
+					 	For Nick Name
+					  -->
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fas fa-user-alt"> </i>
+									</div>
+								</div>
+								<input required type="text" id="nickName" name="nickName"
+									placeholder="Enter NickName Here" class="form-control" />
+
+							</div>
+
+							<!-- 
+					 	For Phone Name
+					  -->
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fas fa-phone"> </i>
+									</div>
+								</div>
+								<input required type="number" id="phone" name="phone"
+									placeholder="Enter Phone Number Here" class="form-control" />
+
+							</div>
+
+							<!-- 
+					 	For Email Name
+					  -->
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text">@</div>
+								</div>
+								<input required type="email" id="email" name="email"
+									placeholder="Enter Email Address Here" class="form-control" />
+
+							</div>
+
+							<!-- 
+					 	For Work Field 
+					  -->
+							<div class="input-group mt-3">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<i class="fa fa-briefcase"> </i>
+									</div>
+								</div>
+								<input required type="text" id="work" name="work"
+									placeholder="Enter Work  Here" class="form-control" />
+							</div>
+
+							<!-- 
+					 	For Contact Description Field 
+					  -->
+							<div class="form-group mt-3">
+								<textarea id="mytextarea" required min="10" class="form-control"
+									name="description" rows="10"
+									placeholder="Enter your Contact Description"></textarea>
+							</div>
+							<!--  Contact Image -->
+							<div class="custom-file">
+								<input type="file" class="profileImage" name="profileImage" />
+							</div>
+							<div class="container text-center">
+								<button class="btn btn-outline-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+			<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">   
+</script>
+			<script>
+			$(document).ready(()=>{	$(".item").removeClass('active');
+			$("#add-link").addClass('active');
+						});
+			</script>
+		</section>
+</body>
+</html>
